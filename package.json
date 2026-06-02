@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Seun-Oyediran/react-depth-parallax"
+    "url": "https://github.com/rndr-realm/react-depth-parallax"
   },
   "type": "module",
   "main": "./dist/index.cjs",
