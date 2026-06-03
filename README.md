@@ -3,6 +3,8 @@
 A WebGL-powered depth-map parallax effect for React.  
 One shared GPU context, one RAF loop — no matter how many cards are on screen.
 
+https://github.com/rndr-realm/react-depth-parallax/raw/main/media/demo.mp4
+
 ---
 
 ## Installation
@@ -22,6 +24,8 @@ yarn add react-depth-parallax
 > This section is written for AI coding assistants. It contains everything needed to integrate this library correctly in one read.
 
 ### Minimal working example
+
+> You'll need two images: a regular photo and a [depth map](#making-depth-maps) of it.
 
 ```tsx
 import { ParallaxProvider, DepthCard } from "react-depth-parallax";
@@ -95,21 +99,9 @@ All cards share a single hidden `<canvas>` and a single WebGL program, keeping G
 
 ---
 
-## Installation
-
-```bash
-npm install react-depth-parallax
-# or
-pnpm add react-depth-parallax
-# or
-yarn add react-depth-parallax
-```
-
-React 17, 18, or 19 is required as a peer dependency.
-
----
-
 ## Quick start
+
+> You'll need two images: a regular photo and a [depth map](#making-depth-maps) of it.
 
 ```tsx
 import { ParallaxProvider, DepthCard } from "react-depth-parallax";
@@ -135,6 +127,8 @@ export default function App() {
 ## Framework setup
 
 ### Next.js (App Router)
+
+> You'll need two images: a regular photo and a [depth map](#making-depth-maps) of it.
 
 The package ships with `"use client"` already in its bundle, so you can import directly from Server Components without a wrapper:
 
@@ -280,12 +274,7 @@ You need an image where **white = close** and **black = far**.
 
 > **The shader reads only the red channel (`depth.r`) of the depth map.** A standard greyscale PNG works perfectly since R = G = B. If you use a custom depth image, make sure the depth data is in the red channel.
 
-**Free options:**
-- [DepthPro Grayscale (Hugging Face)](https://huggingface.co/spaces/cubuvl/DepthPro-transformers-Grayscale) — drag-and-drop, outputs a greyscale depth map ready to use directly.
-- [Depth-Anything (Hugging Face)](https://huggingface.co/spaces/depth-anything/Depth-Anything-V2) — drag-and-drop, runs in browser.
-- [MiDaS](https://github.com/isl-org/MiDaS) — local Python tool, highest quality.
-- Adobe Photoshop → Filter → Neural Filters → Depth Blur → enable depth map output.
-- Stable Diffusion `controlnet-depth` for generated images.
+[DepthPro Grayscale (Hugging Face)](https://huggingface.co/spaces/cubuvl/DepthPro-transformers-Grayscale) — drag-and-drop, outputs a greyscale depth map ready to use directly.
 
 Depth maps don't need to be high resolution — 512×512 or 1024×1024 is usually plenty.
 
