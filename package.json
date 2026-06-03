@@ -1,6 +1,6 @@
 {
   "name": "react-depth-parallax",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "WebGL-powered depth-map parallax effect for React. One shared GPU context, zero dependencies beyond React.",
   "keywords": [
     "react",
