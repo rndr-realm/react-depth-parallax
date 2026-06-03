@@ -32,7 +32,7 @@ export const FRAG = /* glsl */ `
     vec2 uv = vUv * (1.0 - inset) + inset * 0.5;
     vec4 depth = texture2D(uDepthTexture, uv);
     vec2 mp = uMousePosition * 0.5;
-    vec2 coverUv = CoverUV(uv + mp * pow(depth.r, 0.5) * 0.3 * uDepthScale, uCardSize, uImageSize);
+    vec2 coverUv = CoverUV(uv + mp * (depth.r - 0.5) * 0.3 * uDepthScale, uCardSize, uImageSize);
     vec4 color = texture2D(uTexture, coverUv);
     gl_FragColor = vec4(color.rgb, color.a);
   }
