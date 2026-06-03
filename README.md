@@ -3,8 +3,6 @@
 A WebGL-powered depth-map parallax effect for React.  
 One shared GPU context, one RAF loop — no matter how many cards are on screen.
 
-<video src="https://github.com/rndr-realm/react-depth-parallax/raw/main/media/demo.mp4" autoplay loop muted playsinline></video>
-
 ![demo](https://raw.githubusercontent.com/rndr-realm/react-depth-parallax/main/media/demo.gif)
 
 ---
