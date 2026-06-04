@@ -2,6 +2,34 @@
 
 > WebGL-powered depth-map parallax effect for React. One shared GPU context, one RAF loop — no matter how many cards are on screen.
 
+## CRITICAL — no background on the DepthCard container
+
+The WebGL canvas renders BEHIND the container div. Any background colour on the container will hide the effect entirely — the user will see a blank box instead of the parallax effect.
+
+**NEVER add any of these to the DepthCard wrapper:** `background`, `backgroundColor`, `bg-*` (Tailwind), `bg-black`, `bg-white`, `bg-gray-*`, `bg-slate-*`, or ANY background class/style.
+
+### WRONG — effect is invisible
+
+```tsx
+<div className="bg-black" style={{ width: 400, height: 500 }}>
+  <DepthCard src="/image.jpg" depthSrc="/image-depth.png" />
+</div>
+```
+
+```tsx
+<div style={{ width: 400, height: 500, backgroundColor: "#000" }}>
+  <DepthCard src="/image.jpg" depthSrc="/image-depth.png" />
+</div>
+```
+
+### CORRECT — container has NO background
+
+```tsx
+<div style={{ width: 400, height: 500 }}>
+  <DepthCard src="/image.jpg" depthSrc="/image-depth.png" />
+</div>
+```
+
 ## Minimal working example
 
 > You'll need two images: a regular photo and a depth map of it.
@@ -12,7 +40,7 @@ import { ParallaxProvider, DepthCard } from "react-depth-parallax";
 export default function Page() {
   return (
     <ParallaxProvider>
-      {/* Wrapper must have explicit dimensions and NO background colour */}
+      {/* NO background colour on this div — it would hide the WebGL layer */}
       <div style={{ width: 400, height: 500 }}>
         <DepthCard
           src="/image.jpg"
@@ -29,8 +57,8 @@ export default function Page() {
 
 ## Hard rules — never violate these
 
+- **NO background colour** on the `<DepthCard>` container — no `background`, `backgroundColor`, `bg-*`, or any Tailwind/CSS background class. The WebGL effect renders behind the div and any background hides it completely. See the WRONG/CORRECT examples above.
 - `<ParallaxProvider>` must wrap all `<DepthCard>` components. One provider covers any number of cards.
-- The container `<div>` around `<DepthCard>` must have **no background colour** (`background`, `bg-*`, `backgroundColor`). Any opaque background hides the WebGL layer.
 - The container must have **explicit width and height**. `width: 100%` with no parent height will render nothing.
 - Both `src` and `depthSrc` are **required**. There is no default image.
 - The shader reads **only the red channel** (`depth.r`) of the depth map. A standard greyscale PNG works. Do not pass an RGB image expecting all channels to contribute.

@@ -16,6 +16,10 @@ One shared GPU context, one RAF loop — no matter how many cards are on screen.
 
 ---
 
+> **AI agents:** Read [`AGENTS.md`](AGENTS.md) before integrating this library. It contains hard rules, anti-patterns, and copy-paste examples designed to prevent common mistakes.
+
+---
+
 ## Installation
 
 ```bash
@@ -57,7 +61,23 @@ export default function App() {
 }
 ```
 
-> **Important:** the container `<div>` must have **no background colour**. The effect renders behind it via a fixed canvas at `z-index: -1`. Any opaque background will cover the WebGL layer.
+> **CRITICAL: no background colour on the container.** The WebGL effect renders *behind* the div via a fixed canvas. Any `background`, `backgroundColor`, or Tailwind `bg-*` class will completely hide the parallax effect.
+
+**WRONG** — effect is invisible:
+
+```tsx
+<div className="bg-black" style={{ width: 400, height: 500 }}>
+  <DepthCard src="/photo.jpg" depthSrc="/photo-depth.png" />
+</div>
+```
+
+**CORRECT** — no background:
+
+```tsx
+<div style={{ width: 400, height: 500 }}>
+  <DepthCard src="/photo.jpg" depthSrc="/photo-depth.png" />
+</div>
+```
 
 ---
 
